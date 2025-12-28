@@ -3,701 +3,838 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ACT Venue Marketing | Social Media Marketing Agency</title>
-  <meta name="description" content="ACT Venue Marketing helps venues and event brands grow with social strategy, content, paid ads, and community management." />
+  <title>ACT Venue Marketing — Social Media Marketing for Venues</title>
+  <meta name="description" content="ACT Venue Marketing helps venues grow with social media strategy, content, paid ads, and campaign execution." />
 
-  <!-- Calendly widget (popup) -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <!-- Open Graph -->
+  <meta property="og:title" content="ACT Venue Marketing" />
+  <meta property="og:description" content="Social Media Marketing Agency for venues. Strategy, content, ads, and growth." />
+  <meta property="og:type" content="website" />
 
   <style>
     :root{
-      --bg:#0b1020;
-      --panel:#0f1730;
-      --card:#121c39;
-      --text:#eaf0ff;
-      --muted:#b8c3e6;
-      --brand:#7c5cff;
-      --brand2:#28d7ff;
-      --ok:#35e7a5;
-      --border:rgba(255,255,255,.10);
-      --shadow: 0 14px 45px rgba(0,0,0,.35);
-      --radius:18px;
-      --max:1120px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg: #070A12;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --faint: rgba(255,255,255,0.55);
+      --line: rgba(255,255,255,0.12);
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --shadow2: 0 10px 24px rgba(0,0,0,0.35);
+
+      --a: #6EE7FF;  /* cyan */
+      --b: #A78BFA;  /* violet */
+      --c: #34D399;  /* green */
+      --d: #F472B6;  /* pink */
+      --warn: #FBBF24;
+
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+
+      --max: 1140px;
+      --pad: clamp(16px, 3.2vw, 30px);
+      --h1: clamp(34px, 5vw, 58px);
+      --h2: clamp(22px, 3vw, 34px);
+      --lead: clamp(16px, 1.5vw, 18px);
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(124,92,255,.35), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(40,215,255,.25), transparent 55%),
-        radial-gradient(900px 700px at 40% 120%, rgba(53,231,165,.15), transparent 55%),
-        var(--bg);
-      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1100px 700px at 15% 10%, rgba(110,231,255,0.14), transparent 60%),
+                  radial-gradient(900px 600px at 85% 20%, rgba(167,139,250,0.14), transparent 60%),
+                  radial-gradient(800px 520px at 55% 95%, rgba(52,211,153,0.10), transparent 65%),
+                  var(--bg);
+      overflow-x:hidden;
     }
-    a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
-    .section{padding:82px 0}
-    .section.compact{padding:56px 0}
-    .hr{height:1px; background:var(--border); margin:22px 0}
 
-    .badge{
-      display:inline-flex; gap:8px; align-items:center;
-      border:1px solid var(--border);
-      padding:8px 12px; border-radius:999px;
-      background:rgba(255,255,255,.04);
-      color:var(--muted);
-      backdrop-filter: blur(10px);
+    a{ color: inherit; text-decoration:none; }
+    a.underline{ text-decoration: underline; text-decoration-color: rgba(255,255,255,0.35); }
+    a.underline:hover{ text-decoration-color: rgba(255,255,255,0.75); }
+
+    /* Subtle animated grain */
+    .grain{
+      pointer-events:none;
+      position:fixed; inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.26'/%3E%3C/svg%3E");
+      opacity:0.06;
+      mix-blend-mode: overlay;
+      animation: grainMove 10s steps(8) infinite;
+    }
+    @keyframes grainMove{
+      0%{ transform:translate(0,0); }
+      10%{ transform:translate(-2%, -4%); }
+      20%{ transform:translate(-5%, 2%); }
+      30%{ transform:translate(3%, -2%); }
+      40%{ transform:translate(-2%, 6%); }
+      50%{ transform:translate(-6%, -3%); }
+      60%{ transform:translate(5%, 3%); }
+      70%{ transform:translate(2%, -5%); }
+      80%{ transform:translate(-3%, -2%); }
+      90%{ transform:translate(6%, 2%); }
+      100%{ transform:translate(0,0); }
+    }
+
+    /* Layout */
+    .container{ width:min(var(--max), calc(100% - 2*var(--pad))); margin:0 auto; }
+    .topbar{
+      position: sticky; top:0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(7,10,18,0.75), rgba(7,10,18,0.45));
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 12px;
+      min-width: 220px;
+    }
+    .brand-name{
+      display:flex; flex-direction:column; line-height:1.06;
+    }
+    .brand-name strong{ font-size: 15px; letter-spacing:0.2px; }
+    .brand-name span{ font-size: 12px; color: var(--muted); }
+
+    .navlinks{
+      display:flex; align-items:center; gap: 18px;
+    }
+    .navlinks a{
+      font-size: 13px; color: var(--muted);
+      padding: 10px 10px;
+      border-radius: 12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .navlinks a:hover{
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .navcta{
+      display:flex; gap: 10px; align-items:center;
+      min-width: 240px; justify-content:flex-end;
     }
 
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 16px; border-radius:12px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      box-shadow: var(--shadow2);
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease, filter .12s ease;
-      box-shadow: 0 8px 22px rgba(0,0,0,.18);
       white-space:nowrap;
     }
-    .btn:hover{transform: translateY(-1px); background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.18)}
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.22);
+    }
     .btn.primary{
-      border: none;
-      background: linear-gradient(90deg, var(--brand), var(--brand2));
-      color: #071022;
-      font-weight:800;
+      border: 1px solid rgba(110,231,255,0.35);
+      background: linear-gradient(135deg, rgba(110,231,255,0.18), rgba(167,139,250,0.16));
     }
-    .btn.primary:hover{filter:saturate(1.05) brightness(1.02)}
-    .btn.small{padding:10px 12px; border-radius:10px; font-size:14px}
-    .btn.link{background:transparent;border-color:transparent;box-shadow:none;padding:0;color:var(--brand2)}
-    .btn.link:hover{transform:none;text-decoration:underline}
+    .btn.primary:hover{
+      border-color: rgba(110,231,255,0.55);
+      background: linear-gradient(135deg, rgba(110,231,255,0.24), rgba(167,139,250,0.22));
+    }
+    .btn.small{ padding: 10px 12px; border-radius: 12px; }
 
-    .card{
-      border:1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .card.pad{padding:22px}
-    .card.soft{box-shadow: 0 10px 30px rgba(0,0,0,.22)}
-
-    .kicker{color:var(--muted); letter-spacing:.12em; text-transform:uppercase; font-size:12px}
-    .h1{font-size:44px; line-height:1.05; margin:14px 0}
-    .h2{font-size:32px; line-height:1.12; margin:0 0 10px}
-    .h3{font-size:18px; margin:0 0 8px}
-    .p{color:var(--muted); line-height:1.65; margin:0}
-    .p + .p{margin-top:10px}
-
-    .grid{display:grid; gap:18px}
-    .grid.two{grid-template-columns: repeat(2, minmax(0,1fr))}
-    .grid.three{grid-template-columns: repeat(3, minmax(0,1fr))}
-    .grid.four{grid-template-columns: repeat(4, minmax(0,1fr))}
-    @media (max-width: 980px){
-      .grid.four{grid-template-columns: repeat(2, minmax(0,1fr))}
-    }
-    @media (max-width: 840px){
-      .grid.two, .grid.three{grid-template-columns: 1fr}
-      .h1{font-size:38px}
-    }
-
-    /* Nav */
-    .nav{
-      position:sticky; top:0; z-index:50;
-      border-bottom:1px solid var(--border);
-      background: rgba(11,16,32,.65);
-      backdrop-filter: blur(12px);
-    }
-    .nav-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:16px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:900; letter-spacing:.02em;
-      flex: 0 0 auto;
-    }
-    .logo{
-      width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 10px 30px rgba(124,92,255,.25);
-    }
-    .nav-links{display:flex; gap:6px; align-items:center; flex: 1 1 auto; justify-content:center}
-    .nav-links a{
-      color:var(--muted);
-      padding:10px 10px;
-      border-radius:10px;
-      border:1px solid transparent;
-    }
-    .nav-links a:hover{color:var(--text); border-color:rgba(255,255,255,.12); background:rgba(255,255,255,.04)}
-    .nav-cta{display:flex; gap:10px; align-items:center; flex: 0 0 auto}
-
-    .mobile-toggle{display:none}
-    .mobile-panel{display:none}
-
-    @media (max-width: 920px){
-      .nav-links{display:none}
-      .mobile-toggle{display:inline-flex}
-      .mobile-panel{
-        display:none;
-        padding:10px 0 18px;
-      }
-      .mobile-panel.open{display:block}
-      .mobile-panel a{
-        display:block;
-        padding:12px 12px;
-        border-radius:12px;
-        color:var(--muted);
-        border:1px solid rgba(255,255,255,.10);
-        background:rgba(255,255,255,.03);
-        margin-top:10px;
-      }
-      .mobile-panel a:hover{color:var(--text)}
-    }
+    /* Mobile nav */
+    .hamburger{ display:none; }
+    .mobile-menu{ display:none; padding-bottom: 12px; }
+    .mobile-menu a{ display:block; padding: 12px 10px; border-radius: 12px; color: var(--muted); }
+    .mobile-menu a:hover{ background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
 
     /* Hero */
-    .hero{padding:78px 0 34px}
-    .hero-wrap{
-      display:grid; gap:18px;
-      grid-template-columns: 1.2fr .8fr;
+    .hero{
+      padding: clamp(36px, 6vw, 70px) 0 26px;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(16px, 3vw, 28px);
       align-items:stretch;
     }
-    @media (max-width: 980px){
-      .hero-wrap{grid-template-columns:1fr}
+    .badge{
+      display:inline-flex; gap: 10px; align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 12px;
+      width: fit-content;
     }
-    .hero-card{
-      padding:28px;
-      position:relative;
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: radial-gradient(circle at 30% 30%, var(--a), var(--b));
+      box-shadow: 0 0 0 4px rgba(110,231,255,0.10);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: var(--h1);
+      letter-spacing:-0.02em;
+      line-height: 1.02;
+    }
+    .lead{
+      font-size: var(--lead);
+      color: var(--muted);
+      line-height:1.65;
+      margin: 10px 0 18px;
+      max-width: 62ch;
+    }
+    .hero-cta{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 12px; }
+    .hero-stats{
+      display:flex; gap: 12px; flex-wrap:wrap;
+      margin-top: 18px;
+    }
+    .stat{
+      flex: 1 1 160px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+    }
+    .stat strong{ display:block; font-size: 14px; }
+    .stat span{ color: var(--faint); font-size: 12px; }
+
+    /* Side card */
+    .card{
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      box-shadow: var(--shadow);
       overflow:hidden;
+      position:relative;
+      min-height: 100%;
     }
-    .hero-card:before{
+    .card::before{
       content:"";
       position:absolute; inset:-2px;
-      background:
-        radial-gradient(600px 260px at 20% 20%, rgba(124,92,255,.22), transparent 60%),
-        radial-gradient(420px 260px at 80% 10%, rgba(40,215,255,.18), transparent 55%),
-        radial-gradient(500px 300px at 50% 110%, rgba(53,231,165,.12), transparent 60%);
+      background: radial-gradient(700px 280px at 20% 20%, rgba(110,231,255,0.16), transparent 60%),
+                  radial-gradient(620px 260px at 85% 40%, rgba(167,139,250,0.16), transparent 62%),
+                  radial-gradient(520px 240px at 60% 95%, rgba(244,114,182,0.12), transparent 62%);
+      filter: blur(0px);
+      opacity: 0.9;
       pointer-events:none;
     }
-    .hero-card > *{position:relative}
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
-    .hero-proof{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+    .card-inner{
+      position:relative;
+      padding: 18px;
+    }
+    .card h3{
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing:0.1px;
+    }
+    .pillrow{
+      display:flex; gap: 8px; flex-wrap:wrap;
+      margin: 12px 0 12px;
+    }
     .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.03);
-      color:var(--muted);
+      font-size: 12px;
+      color: rgba(255,255,255,0.84);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.16);
+      padding: 8px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
     }
-    .metric{
-      display:flex; flex-direction:column; gap:6px;
-      padding:16px; border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-    }
-    .metric strong{font-size:20px}
-    .metric span{color:var(--muted); font-size:13px; line-height:1.35}
-
-    /* Lists */
-    .list{
-      margin:0; padding:0; list-style:none;
-      display:flex; flex-direction:column; gap:10px;
-    }
-    .list li{display:flex; gap:10px; align-items:flex-start; color:var(--muted)}
-    .check{
-      width:20px; height:20px; border-radius:7px;
-      background: rgba(53,231,165,.14);
-      border:1px solid rgba(53,231,165,.30);
-      display:flex; align-items:center; justify-content:center;
-      color: var(--ok);
-      flex: 0 0 20px;
-      margin-top:2px;
-    }
-
-    /* FAQ */
-    .faq details{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      padding:14px 14px;
-    }
-    .faq summary{cursor:pointer; color:var(--text); font-weight:800}
-    .faq p{margin:10px 0 0; color:var(--muted); line-height:1.6}
-
-    /* Contact */
-    .input, .textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.03);
-      color:var(--text);
-      outline:none;
-    }
-    .textarea{min-height:120px; resize:vertical}
-    .notice{
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px dashed rgba(255,255,255,.18);
-      color:var(--muted);
-      background: rgba(255,255,255,.03);
-    }
-
-    /* Footer + Toast */
-    footer{
-      padding:26px 0 40px;
-      border-top:1px solid var(--border);
-      color:var(--muted);
-    }
-    .toast{
-      position:fixed;
-      right:16px; bottom:16px;
-      max-width:320px;
-      padding:14px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(15,23,48,.85);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
+    .mini{
       color: var(--muted);
-      display:none;
+      font-size: 12px;
+      line-height:1.6;
+      margin-top: 10px;
     }
-    .toast.show{display:block}
-    .toast b{color:var(--text)}
+    .divider{ height: 1px; background: rgba(255,255,255,0.10); margin: 14px 0; }
+    .contactbox{
+      display:flex; flex-direction:column; gap: 10px;
+      background: rgba(0,0,0,0.16);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .contactline{
+      display:flex; justify-content:space-between; gap: 10px; align-items:center;
+      color: rgba(255,255,255,0.86);
+      font-size: 12.5px;
+    }
+    .contactline b{ font-weight: 600; }
+    .copybtn{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.86);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor:pointer;
+      font-size: 12px;
+      transition: transform .15s ease, background .2s ease;
+    }
+    .copybtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.10); }
+
+    /* Sections */
+    section{ padding: 34px 0; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap: 12px;
+      margin-bottom: 16px;
+    }
+    h2{
+      margin:0;
+      font-size: var(--h2);
+      letter-spacing:-0.01em;
+      line-height:1.15;
+    }
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      max-width: 62ch;
+      line-height:1.6;
+      font-size: 14px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .feature{
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      box-shadow: var(--shadow2);
+      min-height: 150px;
+    }
+    .feature .icon{
+      width: 42px; height: 42px;
+      border-radius: 16px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(135deg, rgba(110,231,255,0.16), rgba(167,139,250,0.14));
+      margin-bottom: 10px;
+    }
+    .feature h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+    .feature p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 13.5px;
+    }
+
+    .work{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .step{
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+    .step b{ display:block; margin-bottom: 6px; }
+    .step span{ color: var(--muted); font-size: 13px; line-height:1.55; }
+
+    .cta-banner{
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(135deg, rgba(110,231,255,0.14), rgba(167,139,250,0.12), rgba(52,211,153,0.08));
+      box-shadow: var(--shadow);
+      padding: 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 18px;
+      flex-wrap:wrap;
+    }
+    .cta-banner h3{ margin:0 0 6px; font-size: 18px; }
+    .cta-banner p{ margin:0; color: var(--muted); line-height:1.6; font-size: 13.5px; max-width: 70ch; }
+
+    /* Calendly */
+    .calwrap{
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+    }
+    .calhead{
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
+      flex-wrap:wrap;
+    }
+    .calhead small{ color: var(--muted); }
+    .calbody{
+      min-height: 720px;
+      background: rgba(0,0,0,0.14);
+    }
+    .calbody iframe{
+      width: 100%;
+      height: 720px;
+      border: 0;
+    }
+
+    /* Footer */
+    footer{
+      padding: 26px 0 34px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      margin-top: 20px;
+      color: var(--muted);
+    }
+    .foot{
+      display:flex; justify-content:space-between; gap: 18px; flex-wrap:wrap;
+      font-size: 13px;
+    }
+    .foot a{ color: rgba(255,255,255,0.82); }
+    .foot a:hover{ text-decoration: underline; text-decoration-color: rgba(255,255,255,0.4); }
+
+    /* Reveal animations */
+    .reveal{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .navcta{ min-width: unset; }
+      .work{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 740px){
+      .navlinks{ display:none; }
+      .hamburger{ display:inline-flex; }
+      .mobile-menu{ display:block; }
+      .grid3{ grid-template-columns: 1fr; }
+      .work{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+    }
   </style>
 </head>
 
 <body>
-  <!-- NAV -->
-  <header class="nav">
+  <div class="grain"></div>
+
+  <!-- Sticky nav -->
+  <header class="topbar">
     <div class="container">
-      <div class="nav-inner">
-        <a class="brand" href="#top" aria-label="ACT Venue Marketing Home">
-          <span class="logo" aria-hidden="true"></span>
-          <span>ACT Venue Marketing</span>
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="ACT Venue Marketing home">
+          <!-- LOGO (original SVG created for this site) -->
+          <svg width="44" height="44" viewBox="0 0 64 64" role="img" aria-label="ACT Venue Marketing logo">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#6EE7FF" stop-opacity="1"/>
+                <stop offset="0.52" stop-color="#A78BFA" stop-opacity="1"/>
+                <stop offset="1" stop-color="#34D399" stop-opacity="1"/>
+              </linearGradient>
+              <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <rect x="6" y="6" width="52" height="52" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)"/>
+            <path filter="url(#soft)" d="M18 40c10-6 18-19 28-20 0 11-7 20-19 24-4 1-7-1-9-4z" fill="url(#g1)"/>
+            <path d="M20 20h10l-5 10z" fill="rgba(255,255,255,0.85)"/>
+            <path d="M34 18h12v4H38v6h8v4h-8v10h-4z" fill="rgba(255,255,255,0.85)"/>
+          </svg>
+
+          <div class="brand-name">
+            <strong>ACT Venue Marketing</strong>
+            <span>Social Media Marketing Agency</span>
+          </div>
         </a>
 
-        <nav class="nav-links" aria-label="Primary">
+        <nav class="navlinks" aria-label="Primary navigation">
           <a href="#services">Services</a>
           <a href="#process">Process</a>
           <a href="#results">Results</a>
-          <a href="#testimonials">Testimonials</a>
-          <a href="#faq">FAQ</a>
+          <a href="#consult">Consultations</a>
           <a href="#contact">Contact</a>
         </nav>
 
-        <div class="nav-cta">
-          <button class="btn small mobile-toggle" id="menuBtn">Menu</button>
-          <button class="btn small" id="bookBtn">Book a Consultation</button>
-          <a class="btn primary small" href="#contact">Get a Proposal</a>
+        <div class="navcta">
+          <a class="btn small" href="mailto:info@actvenuemarketing.com" aria-label="Email ACT Venue Marketing">
+            Email
+            <span aria-hidden="true">✉️</span>
+          </a>
+          <a class="btn small primary" href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">
+            Book a Consultation
+            <span aria-hidden="true">↗</span>
+          </a>
+
+          <button class="btn small hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+            Menu <span aria-hidden="true">☰</span>
+          </button>
         </div>
       </div>
 
-      <div id="mobilePanel" class="mobile-panel" aria-label="Mobile Menu">
+      <div class="mobile-menu" id="mobileMenu" hidden>
         <a href="#services">Services</a>
         <a href="#process">Process</a>
         <a href="#results">Results</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#faq">FAQ</a>
+        <a href="#consult">Consultations</a>
         <a href="#contact">Contact</a>
-        <a href="#" id="bookBtnMobile">Book a Consultation (Calendly)</a>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <main id="top">
-    <section class="hero">
-      <div class="container">
-        <div class="hero-wrap">
-          <div class="card hero-card">
-            <div class="badge">🎯 Social Media Marketing for Venues, Events & Entertainment</div>
-            <h1 class="h1">Turn attention into ticket sales, bookings, and loyal fans.</h1>
-            <p class="p">
-              ACT Venue Marketing helps venues and event brands grow with a proven mix of strategy,
-              content, paid ads, and community management—built for performance and consistency.
+  <!-- Hero -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="reveal">
+          <div class="badge"><span class="dot"></span> Built for venues, events & nightlife brands</div>
+          <h1>Turn attention into tickets with social media that performs.</h1>
+          <p class="lead">
+            ACT Venue Marketing helps venues grow through scroll-stopping content, consistent posting, and paid campaigns
+            designed to increase awareness and drive real attendance.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn primary" href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">
+              Schedule a Free Consultation <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn" href="#services">
+              Explore Services <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Strategy + Execution</strong>
+              <span>We plan and produce, end-to-end.</span>
+            </div>
+            <div class="stat">
+              <strong>Content that Converts</strong>
+              <span>Short-form video, graphics, and hooks.</span>
+            </div>
+            <div class="stat">
+              <strong>Paid Social Support</strong>
+              <span>Campaigns optimized for real outcomes.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card reveal" aria-label="Quick contact card">
+          <div class="card-inner">
+            <h3>Let’s build your next sold-out moment.</h3>
+            <div class="pillrow">
+              <span class="pill">Instagram Growth</span>
+              <span class="pill">Reels & Short-Form</span>
+              <span class="pill">Ad Campaigns</span>
+              <span class="pill">Promoter Support</span>
+            </div>
+            <p class="mini">
+              Perfect if you want more reach, better consistency, and campaigns that turn interest into attendance.
             </p>
+            <div class="divider"></div>
 
-            <div class="hero-actions">
-              <button class="btn primary" id="heroBookBtn">Book a Free Consultation</button>
-              <a class="btn" href="#services">Explore Services</a>
-              <a class="btn" href="#results">See Results</a>
-            </div>
-
-            <div class="hero-proof">
-              <span class="pill">✅ Content that converts</span>
-              <span class="pill">✅ Paid ads + retargeting</span>
-              <span class="pill">✅ Monthly reporting</span>
-              <span class="pill">✅ Fast creative turnaround</span>
-            </div>
-          </div>
-
-          <div class="card pad soft">
-            <div class="kicker">Quick Wins</div>
-            <h2 class="h2">What we improve in 30 days</h2>
-            <div class="grid" style="margin-top:14px">
-              <div class="metric">
-                <strong>Consistency</strong>
-                <span>Posting cadence + content pillars that match your audience.</span>
+            <div class="contactbox">
+              <div class="contactline">
+                <span><b>Email</b></span>
+                <a class="underline" href="mailto:info@actvenuemarketing.com">info@actvenuemarketing.com</a>
               </div>
-              <div class="metric">
-                <strong>Creative</strong>
-                <span>Scroll-stopping short-form content designed to convert.</span>
+
+              <div class="contactline">
+                <span><b>Consultation</b></span>
+                <a class="underline" href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">Calendly Link</a>
               </div>
-              <div class="metric">
-                <strong>Paid Reach</strong>
-                <span>Campaigns + retargeting to drive ticket sales & inquiries.</span>
-              </div>
-              <div class="metric">
-                <strong>Clarity</strong>
-                <span>Reporting that shows what’s working—without fluff.</span>
-              </div>
+
+              <button class="copybtn" id="copyEmail">Copy Email</button>
             </div>
 
-            <div class="hr"></div>
-            <ul class="list">
-              <li><span class="check">✓</span> Venue-specific social strategy & content calendar</li>
-              <li><span class="check">✓</span> Reels/TikTok-style content repurposed across platforms</li>
-              <li><span class="check">✓</span> Ad funnels (cold → warm → hot) for conversions</li>
-              <li><span class="check">✓</span> Community management + engagement routines</li>
-            </ul>
+            <p class="mini" id="copyToast" style="display:none; margin-top:10px; color: rgba(110,231,255,0.9);">
+              Copied!
+            </p>
           </div>
-        </div>
+        </aside>
       </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="section compact" id="services">
-      <div class="container">
-        <div class="kicker">Services</div>
-        <h2 class="h2">Everything you need to grow your venue’s social presence</h2>
-        <p class="p">Pick a package or mix and match. We tailor plans to your goals, capacity, and timelines.</p>
-
-        <div class="grid three" style="margin-top:18px">
-          <div class="card pad">
-            <h3 class="h3">Strategy + Planning</h3>
-            <p class="p">Audience research, content pillars, brand voice, and a monthly content roadmap.</p>
-          </div>
-          <div class="card pad">
-            <h3 class="h3">Content Creation</h3>
-            <p class="p">Reels, TikToks, carousels, stories, and event promos designed to drive action.</p>
-          </div>
-          <div class="card pad">
-            <h3 class="h3">Social Management</h3>
-            <p class="p">Posting, scheduling, community management, and engagement routines.</p>
-          </div>
-          <div class="card pad">
-            <h3 class="h3">Paid Social Ads</h3>
-            <p class="p">Campaign strategy, creatives, targeting, retargeting, and optimization.</p>
-          </div>
-          <div class="card pad">
-            <h3 class="h3">Influencer + Partnerships</h3>
-            <p class="p">Local creator outreach, partner promos, and collaborative campaigns.</p>
-          </div>
-          <div class="card pad">
-            <h3 class="h3">Analytics + Reporting</h3>
-            <p class="p">Monthly performance dashboards with clear next steps and iteration.</p>
-          </div>
-        </div>
-
-        <div class="hero-actions" style="margin-top:18px">
-          <button class="btn primary" id="servicesBookBtn">Book a Consultation</button>
-          <a class="btn" href="#contact">Request Pricing</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section class="section compact" id="process">
-      <div class="container">
-        <div class="kicker">Process</div>
-        <h2 class="h2">A simple system that produces consistent results</h2>
-
-        <div class="grid four" style="margin-top:18px">
-          <div class="card pad">
-            <div class="badge">1) Audit</div>
-            <p class="p" style="margin-top:10px">We review your social profiles, content, and funnels to spot quick wins.</p>
-          </div>
-          <div class="card pad">
-            <div class="badge">2) Strategy</div>
-            <p class="p" style="margin-top:10px">We build your content plan + offer angle around what your audience wants.</p>
-          </div>
-          <div class="card pad">
-            <div class="badge">3) Execute</div>
-            <p class="p" style="margin-top:10px">We publish content, run ads, and manage engagement with clear cadence.</p>
-          </div>
-          <div class="card pad">
-            <div class="badge">4) Optimize</div>
-            <p class="p" style="margin-top:10px">We improve weekly based on performance—doubling down on what works.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- RESULTS / CASE STUDIES -->
-    <section class="section compact" id="results">
-      <div class="container">
-        <div class="kicker">Results</div>
-        <h2 class="h2">Recent outcomes (examples)</h2>
-        <p class="p">Swap these with your real numbers once you have them—this layout is built for credibility.</p>
-
-        <div class="grid three" style="margin-top:18px">
-          <div class="card pad">
-            <h3 class="h3">Venue A — Event Night Push</h3>
-            <p class="p">Short-form content + retargeting ads increased last-minute attendance.</p>
-            <div class="hr"></div>
-            <ul class="list">
-              <li><span class="check">✓</span> Improved CTR with better hooks & creatives</li>
-              <li><span class="check">✓</span> Retargeting to warm audiences</li>
-              <li><span class="check">✓</span> Story highlights optimized for conversion</li>
-            </ul>
-          </div>
-
-          <div class="card pad">
-            <h3 class="h3">Venue B — Monthly Growth</h3>
-            <p class="p">Consistency + content pillars drove stronger engagement and inquiries.</p>
-            <div class="hr"></div>
-            <ul class="list">
-              <li><span class="check">✓</span> Weekly content batching system</li>
-              <li><span class="check">✓</span> Community engagement routines</li>
-              <li><span class="check">✓</span> Reporting + iteration cycles</li>
-            </ul>
-          </div>
-
-          <div class="card pad">
-            <h3 class="h3">Event Brand — Launch Campaign</h3>
-            <p class="p">Creative testing + audience targeting improved conversions over time.</p>
-            <div class="hr"></div>
-            <ul class="list">
-              <li><span class="check">✓</span> Cold-to-warm funnel structure</li>
-              <li><span class="check">✓</span> Creative A/B testing</li>
-              <li><span class="check">✓</span> Landing + offer alignment</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="notice" style="margin-top:18px">
-          Want your numbers here? Book a consultation and we’ll map a 30-day plan that fits your venue.
-          <div style="margin-top:10px">
-            <button class="btn primary" id="resultsBookBtn">Book a Consultation</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="section compact" id="testimonials">
-      <div class="container">
-        <div class="kicker">Testimonials</div>
-        <h2 class="h2">Social proof that builds trust</h2>
-
-        <div class="grid three" style="margin-top:18px">
-          <div class="card pad">
-            <p class="p">“Our socials finally feel consistent and professional. The content is better—and it performs.”</p>
-            <div class="hr"></div>
-            <p class="p"><strong style="color:var(--text)">— Venue Manager</strong><br><span style="color:var(--muted)">Live entertainment space</span></p>
-          </div>
-          <div class="card pad">
-            <p class="p">“The ads brought in people who actually buy tickets. Clear reporting, clear improvements.”</p>
-            <div class="hr"></div>
-            <p class="p"><strong style="color:var(--text)">— Event Promoter</strong><br><span style="color:var(--muted)">Monthly series</span></p>
-          </div>
-          <div class="card pad">
-            <p class="p">“Fast turnaround and great creative direction. Our engagement went up within weeks.”</p>
-            <div class="hr"></div>
-            <p class="p"><strong style="color:var(--text)">— Marketing Lead</strong><br><span style="color:var(--muted)">Hospitality brand</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section compact" id="faq">
-      <div class="container">
-        <div class="kicker">FAQ</div>
-        <h2 class="h2">Questions we get all the time</h2>
-
-        <div class="grid two faq" style="margin-top:18px">
-          <details class="card pad">
-            <summary>Do you create content or just manage posting?</summary>
-            <p>We do both. You can choose content creation, management, paid ads—or a full package.</p>
-          </details>
-          <details class="card pad">
-            <summary>How quickly can we start?</summary>
-            <p>After a kickoff call, we can typically begin planning immediately and launch within days depending on assets.</p>
-          </details>
-          <details class="card pad">
-            <summary>Which platforms do you focus on?</summary>
-            <p>Usually Instagram, TikTok, Facebook, and YouTube Shorts—based on your audience and goals.</p>
-          </details>
-          <details class="card pad">
-            <summary>Do you run ads for ticketed events?</summary>
-            <p>Yes—especially retargeting and conversion-focused campaigns that move people from interest to purchase.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="kicker">Contact</div>
-        <h2 class="h2">Let’s grow your venue</h2>
-        <p class="p">
-          Email us at <a class="btn link" href="mailto:info@actvenuemarketing.com">info@actvenuemarketing.com</a>
-          or book a consultation using Calendly.
-        </p>
-
-        <div class="grid two" style="margin-top:18px; align-items:start;">
-          <div class="card pad">
-            <h3 class="h3">Send a message</h3>
-            <p class="p" style="margin-bottom:12px">This form opens your email app with a pre-filled message.</p>
-
-            <form id="contactForm">
-              <label class="p" for="name">Name</label>
-              <input class="input" id="name" name="name" placeholder="Your name" required />
-
-              <div style="height:10px"></div>
-
-              <label class="p" for="email">Email</label>
-              <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required />
-
-              <div style="height:10px"></div>
-
-              <label class="p" for="message">What are you promoting?</label>
-              <textarea class="textarea" id="message" name="message" placeholder="Tell us about your venue, event schedule, and goals..." required></textarea>
-
-              <div style="height:14px"></div>
-
-              <button class="btn primary" type="submit">Email ACT Venue Marketing</button>
-            </form>
-
-            <div class="hr"></div>
-            <div class="notice">
-              Prefer direct email? <b style="color:var(--text)">info@actvenuemarketing.com</b>
-            </div>
-          </div>
-
-          <div class="card pad">
-            <h3 class="h3">Book a consultation</h3>
-            <p class="p">Choose a time that works for you. We’ll review your goals and recommend the best path forward.</p>
-
-            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-              <button class="btn primary" id="contactBookBtn">Open Calendly (Popup)</button>
-              <a class="btn" href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">
-                Open Calendly (New Tab)
-              </a>
-            </div>
-
-            <div class="hr"></div>
-            <ul class="list">
-              <li><span class="check">✓</span> 15–30 minute intro call</li>
-              <li><span class="check">✓</span> Quick audit + recommendations</li>
-              <li><span class="check">✓</span> Clear next steps + pricing options</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
+  <!-- Services -->
+  <section id="services">
     <div class="container">
-      <div class="grid two" style="align-items:center">
+      <div class="section-title reveal">
         <div>
-          <div class="brand" style="gap:10px">
-            <span class="logo" aria-hidden="true"></span>
-            <span>ACT Venue Marketing</span>
-          </div>
-          <p class="p" style="margin-top:10px">
-            Social Media Marketing Agency for venues, events, and entertainment brands.
-          </p>
-        </div>
-        <div style="text-align:right">
-          <p class="p">Email: <a class="btn link" href="mailto:info@actvenuemarketing.com">info@actvenuemarketing.com</a></p>
-          <p class="p" style="margin-top:8px">
-            <a class="btn link" href="#top">Back to top ↑</a>
-          </p>
+          <h2>Services that move the needle</h2>
+          <p class="sub">Flexible packages for venues — from weekly content to full-funnel campaigns.</p>
         </div>
       </div>
 
-      <div class="hr"></div>
-      <p class="p" style="font-size:14px">© <span id="year"></span> ACT Venue Marketing. All rights reserved.</p>
+      <div class="grid3">
+        <div class="feature reveal">
+          <div class="icon" aria-hidden="true">📣</div>
+          <h3>Social Strategy</h3>
+          <p>Positioning, content pillars, posting cadence, and campaigns aligned to your venue’s calendar.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon" aria-hidden="true">🎬</div>
+          <h3>Content Production</h3>
+          <p>Reels, stories, graphics, and promo assets designed to stop thumbs and drive clicks.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon" aria-hidden="true">📈</div>
+          <h3>Paid Social Ads</h3>
+          <p>Ad creative + targeting + optimization to scale your best events and boost turnout.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon" aria-hidden="true">🗓️</div>
+          <h3>Event Launch Kits</h3>
+          <p>Everything needed for a clean drop: teasers, countdowns, lineups, and launch-day momentum.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon" aria-hidden="true">🤝</div>
+          <h3>Promoter Collaboration</h3>
+          <p>Co-branded assets and shareable packages that help promoters push consistent messaging.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon" aria-hidden="true">🧠</div>
+          <h3>Analytics & Reporting</h3>
+          <p>Monthly insights on reach, engagement, video performance, and what to improve next.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process">
+    <div class="container">
+      <div class="section-title reveal">
+        <div>
+          <h2>A simple process, executed relentlessly</h2>
+          <p class="sub">We keep the workflow clear so you can focus on running the venue.</p>
+        </div>
+      </div>
+
+      <div class="work">
+        <div class="step reveal">
+          <b>1) Discovery</b>
+          <span>We review your brand, audience, event schedule, and goals.</span>
+        </div>
+        <div class="step reveal">
+          <b>2) Strategy</b>
+          <span>Content pillars, offers, formats, and a weekly plan with clear KPIs.</span>
+        </div>
+        <div class="step reveal">
+          <b>3) Create</b>
+          <span>We design/produce assets and write captions built for engagement.</span>
+        </div>
+        <div class="step reveal">
+          <b>4) Launch + Optimize</b>
+          <span>We post, test, iterate, and amplify winners with paid support.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results / Proof -->
+  <section id="results">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div>
+          <h3>What success looks like for venues</h3>
+          <p>
+            More reach, stronger consistency, higher-quality engagement, and campaigns that push people from “maybe” to “I’m going.”
+            We prioritize repeatable systems so every event is easier to sell than the last.
+          </p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn primary" href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">
+            Book Consultation
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="btn" href="#contact">Contact Us <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultations (Calendly embed + link) -->
+  <section id="consult">
+    <div class="container">
+      <div class="section-title reveal">
+        <div>
+          <h2>Consultations</h2>
+          <p class="sub">Pick a time that works. We’ll review your current presence and outline a clear growth plan.</p>
+        </div>
+        <div>
+          <a class="btn primary" href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">
+            Open Calendly <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="calwrap reveal">
+        <div class="calhead">
+          <div>
+            <b>Book a Consultation</b><br />
+            <small>Powered by Calendly</small>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn small" href="#contact">Email Instead</a>
+            <a class="btn small" href="mailto:info@actvenuemarketing.com">info@actvenuemarketing.com</a>
+          </div>
+        </div>
+        <div class="calbody">
+          <!-- Simple iframe embed (works reliably without extra scripts) -->
+          <iframe
+            title="Calendly Scheduling Page"
+            src="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12&hide_gdpr_banner=1"
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title reveal">
+        <div>
+          <h2>Contact</h2>
+          <p class="sub">Reach out anytime — we’ll respond with next steps and a recommended package.</p>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="feature reveal" style="grid-column: span 2;">
+          <div class="icon" aria-hidden="true">✉️</div>
+          <h3>Email</h3>
+          <p>
+            <a class="underline" href="mailto:info@actvenuemarketing.com">info@actvenuemarketing.com</a><br />
+            Prefer quick context? Include your venue name, city, and your next event date.
+          </p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="mailto:info@actvenuemarketing.com?subject=ACT%20Venue%20Marketing%20Inquiry&body=Venue%20Name%3A%0ACity%3A%0AInstagram%2FTikTok%20Links%3A%0ANext%20Event%20Date%3A%0AGoal%3A">
+              Email with Template <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn" href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">
+              Schedule Call <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon" aria-hidden="true">⚡</div>
+          <h3>Fast Start</h3>
+          <p>
+            If you have an event within 14 days, book a consultation so we can move quickly with a launch plan.
+          </p>
+          <div style="margin-top:12px;">
+            <a class="btn small primary" href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">
+              Book Now <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <b style="color: rgba(255,255,255,0.88);">ACT Venue Marketing</b><br />
+          <span>Social Media Marketing Agency</span>
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center;">
+          <a href="mailto:info@actvenuemarketing.com">info@actvenuemarketing.com</a>
+          <span style="opacity:.35;">•</span>
+          <a href="https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12" target="_blank" rel="noopener noreferrer">Consultations</a>
+          <span style="opacity:.35;">•</span>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+      <div style="margin-top:14px; font-size:12px; color: rgba(255,255,255,0.50);">
+        © <span id="year"></span> ACT Venue Marketing. All rights reserved.
+      </div>
     </div>
   </footer>
 
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
   <script>
-    const CALENDLY_URL = "https://calendly.com/talalaslam-actvenuemarketing/new-meeting?month=2025-12";
-    const $ = (sel) => document.querySelector(sel);
-
-    function toast(msg, title="Done"){
-      const el = $("#toast");
-      if(!el) return;
-      el.innerHTML = `<b>${title}</b><div style="margin-top:6px">${msg}</div>`;
-      el.classList.add("show");
-      setTimeout(()=> el.classList.remove("show"), 3200);
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.hasAttribute('hidden') === false;
+        if (isOpen) {
+          mobileMenu.setAttribute('hidden', '');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          mobileMenu.removeAttribute('hidden');
+          menuBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
     }
 
-    function toggleMobileNav(){
-      const panel = $("#mobilePanel");
-      panel.classList.toggle("open");
+    // Copy email
+    const copyBtn = document.getElementById('copyEmail');
+    const toast = document.getElementById('copyToast');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('info@actvenuemarketing.com');
+          toast.style.display = 'block';
+          setTimeout(() => toast.style.display = 'none', 1400);
+        } catch (e) {
+          // fallback: open mail client
+          window.location.href = 'mailto:info@actvenuemarketing.com';
+        }
+      });
     }
 
-    function openCalendlyPopup(){
-      if (window.Calendly && window.Calendly.initPopupWidget) {
-        window.Calendly.initPopupWidget({ url: CALENDLY_URL });
-      } else {
-        window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
-      }
-    }
-
-    function handleContactSubmit(e){
-      e.preventDefault();
-      const name = $("#name").value.trim();
-      const email = $("#email").value.trim();
-      const message = $("#message").value.trim();
-
-      const subject = encodeURIComponent(`ACT Venue Marketing Inquiry — ${name || "Website Visitor"}`);
-      const body = encodeURIComponent(
-`Name: ${name}
-Email: ${email}
-
-Message:
-${message}
-
----
-Sent from ACT Venue Marketing site`
-      );
-
-      window.location.href = `mailto:info@actvenuemarketing.com?subject=${subject}&body=${body}`;
-      toast("Your email app should open with your message pre-filled.", "Contact");
-    }
-
-    // Wire up events
-    $("#menuBtn")?.addEventListener("click", toggleMobileNav);
-    $("#bookBtn")?.addEventListener("click", openCalendlyPopup);
-    $("#bookBtnMobile")?.addEventListener("click", (e)=>{e.preventDefault(); openCalendlyPopup();});
-    $("#heroBookBtn")?.addEventListener("click", openCalendlyPopup);
-    $("#servicesBookBtn")?.addEventListener("click", openCalendlyPopup);
-    $("#resultsBookBtn")?.addEventListener("click", openCalendlyPopup);
-    $("#contactBookBtn")?.addEventListener("click", openCalendlyPopup);
-    $("#contactForm")?.addEventListener("submit", handleContactSubmit);
+    // Reveal on scroll
+    const els = Array.from(document.querySelectorAll('.reveal'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
 
     // Year
-    $("#year").textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Close mobile panel on link click (nice UX)
-    document.querySelectorAll('#mobilePanel a[href^="#"]').forEach(a=>{
-      a.addEventListener("click", ()=> $("#mobilePanel").classList.remove("open"));
+    // Close mobile menu on nav click
+    document.querySelectorAll('#mobileMenu a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (!mobileMenu.hasAttribute('hidden')) mobileMenu.setAttribute('hidden', '');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+      });
     });
   </script>
 </body>
